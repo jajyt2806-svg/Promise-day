@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>For Jessy 💗</title>
+  <title>Unlock My Love 💗</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Romantic Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
 
   <style>
@@ -16,20 +15,27 @@
       align-items: center;
       flex-direction: column;
       background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-      overflow: hidden;
       text-align: center;
+      overflow: hidden;
     }
 
-    #enterBtn {
-      padding: 15px 30px;
+    #tapBtn {
+      padding: 20px 35px;
       font-size: 20px;
       border: none;
-      border-radius: 30px;
+      border-radius: 40px;
       background: white;
       color: #ff4d6d;
       font-weight: bold;
       cursor: pointer;
       box-shadow: 0 0 20px rgba(255,255,255,0.8);
+    }
+
+    #counter {
+      margin-top: 15px;
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      font-size: 18px;
     }
 
     #content {
@@ -70,7 +76,8 @@
 
 <body>
 
-<button id="enterBtn" onclick="startLove()">Tap to Open 💗</button>
+<button id="tapBtn" onclick="tapLove()">Tap to Unlock 💗</button>
+<div id="counter">Taps: 0 / 10</div>
 
 <div id="content">
   <h1>I'm Always With You Jessy 💗</h1>
@@ -78,15 +85,19 @@
   <div class="heart">❤️</div>
 </div>
 
-<audio id="bgMusic" loop>
-  <source src="love.mp3" type="audio/mpeg">
-</audio>
-
 <script>
-  function startLove() {
-    document.getElementById("enterBtn").style.display = "none";
-    document.getElementById("content").style.display = "block";
-    document.getElementById("bgMusic").play();
+  let taps = 0;
+  let requiredTaps = 10;
+
+  function tapLove() {
+    taps++;
+    document.getElementById("counter").innerHTML = "Taps: " + taps + " / 10";
+
+    if (taps >= requiredTaps) {
+      document.getElementById("tapBtn").style.display = "none";
+      document.getElementById("counter").style.display = "none";
+      document.getElementById("content").style.display = "block";
+    }
   }
 </script>
 
