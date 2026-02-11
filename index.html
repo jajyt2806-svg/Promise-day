@@ -2,46 +2,57 @@
 <html>
 <head>
   <title>For Jessy 💗</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Beautiful Fonts -->
+  <!-- Romantic Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
 
   <style>
     body {
       margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      text-align: center;
+      flex-direction: column;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
       overflow: hidden;
+      text-align: center;
     }
 
-    .container {
-      animation: fadeIn 3s ease-in-out;
+    #enterBtn {
+      padding: 15px 30px;
+      font-size: 20px;
+      border: none;
+      border-radius: 30px;
+      background: white;
+      color: #ff4d6d;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(255,255,255,0.8);
+    }
+
+    #content {
+      display: none;
+      animation: fadeIn 2s ease-in-out forwards;
     }
 
     h1 {
       font-family: 'Great Vibes', cursive;
-      font-size: 60px;
+      font-size: 55px;
       color: white;
-      margin-bottom: 20px;
-      text-shadow: 0 0 20px rgba(255,255,255,0.8);
+      text-shadow: 0 0 20px white;
     }
 
     p {
       font-family: 'Poppins', sans-serif;
       font-size: 22px;
       color: white;
-      letter-spacing: 1px;
     }
 
     .heart {
       font-size: 70px;
       animation: beat 1s infinite;
-      margin-top: 20px;
     }
 
     @keyframes beat {
@@ -59,16 +70,25 @@
 
 <body>
 
-  <div class="container">
-    <h1>I'm Always With You Jessy 💗</h1>
-    <p>Happy Promise Day My Love 🌹</p>
-    <div class="heart">❤️</div>
-  </div>
+<button id="enterBtn" onclick="startLove()">Tap to Open 💗</button>
 
-  <!-- Background Music -->
-  <audio autoplay loop>
-    <source src="love.mp3" type="audio/mpeg">
-  </audio>
+<div id="content">
+  <h1>I'm Always With You Jessy 💗</h1>
+  <p>Happy Promise Day My Love 🌹</p>
+  <div class="heart">❤️</div>
+</div>
+
+<audio id="bgMusic" loop>
+  <source src="love.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  function startLove() {
+    document.getElementById("enterBtn").style.display = "none";
+    document.getElementById("content").style.display = "block";
+    document.getElementById("bgMusic").play();
+  }
+</script>
 
 </body>
 </html>
