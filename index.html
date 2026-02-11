@@ -1,32 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Promise Day 💗</title>
+  <title>For My Love 💗</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       margin: 0;
       overflow: hidden;
-      background: linear-gradient(to bottom right, #ff758c, #ff7eb3);
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      flex-direction: column;
+      background: linear-gradient(-45deg, #ff758c, #ff7eb3, #ff4d6d, #ff8fa3);
+      background-size: 400% 400%;
+      animation: gradient 8s ease infinite;
       font-family: Arial, sans-serif;
     }
 
-    h1 {
+    @keyframes gradient {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      background: white;
+      color: #ff4d6d;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(255,255,255,0.6);
+    }
+
+    #message {
+      display: none;
       color: white;
       font-size: 28px;
       text-align: center;
-      z-index: 2;
+      opacity: 0;
+      animation: fadeIn 2s forwards;
+      text-shadow: 0 0 20px white;
       padding: 20px;
-      animation: glow 1.5s infinite alternate;
     }
 
-    @keyframes glow {
-      from { text-shadow: 0 0 10px white; }
-      to { text-shadow: 0 0 25px red; }
+    @keyframes fadeIn {
+      to { opacity: 1; }
     }
 
     .heart {
@@ -36,40 +58,44 @@
     }
 
     @keyframes float {
-      0% {
-        transform: translateY(100vh);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-10vh);
-        opacity: 0;
-      }
+      0% { transform: translateY(100vh); opacity: 1; }
+      100% { transform: translateY(-10vh); opacity: 0; }
     }
   </style>
 </head>
 <body>
 
-<h1>
+<button onclick="startSurprise()">Tap for a Surprise 💗</button>
+
+<div id="message">
   I'm always with you Jessy 💗🫂 <br>
   Happy Promise Day 💕
-</h1>
+</div>
+
+<audio id="bgmusic" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
 
 <script>
-  function createHeart() {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "💗";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = Math.random() * 20 + 15 + "px";
-    heart.style.animationDuration = Math.random() * 3 + 3 + "s";
-    document.body.appendChild(heart);
+  function startSurprise() {
+    document.querySelector("button").style.display = "none";
+    const msg = document.getElementById("message");
+    msg.style.display = "block";
 
-    setTimeout(() => {
-      heart.remove();
-    }, 6000);
+    document.getElementById("bgmusic").play();
+
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "💗";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 20 + 15 + "px";
+      heart.style.animationDuration = Math.random() * 3 + 3 + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 6000);
+    }, 300);
   }
-
-  setInterval(createHeart, 300);
 </script>
 
 </body>
