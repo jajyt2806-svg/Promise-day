@@ -1,86 +1,253 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>For Jessy 💗</title>
+  <title>For My Jessy 💗</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
 
   <style>
     body {
       margin: 0;
       height: 100vh;
-      background: linear-gradient(to top right, #ff9a9e, #fecfef);
+      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      overflow: hidden;
+      font-family: 'Poppins', sans-serif;
       text-align: center;
+      background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #ff758c, #ff7eb3);
+      background-size: 400% 400%;
+      animation: gradientBG 8s ease infinite;
     }
 
-    .girl {
-      width: 180px;
-      animation: float 3s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     h1 {
       font-family: 'Great Vibes', cursive;
-      font-size: 50px;
+      font-size: 42px;
       color: white;
-      margin-top: 20px;
-      text-shadow: 0 0 20px white;
-      animation: fadeIn 3s ease-in-out forwards;
+      text-shadow: 0 0 15px white;
     }
 
-    p {
-      font-family: 'Poppins', sans-serif;
-      font-size: 20px;
+    img {
+      width: 150px;
+      margin: 15px 0;
+    }
+
+    .btn-container {
+      position: relative;
+      height: 80px;
+    }
+
+    button {
+      padding: 12px 28px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      margin: 5px;
+      transition: 0.3s;
+    }
+
+    #yesBtn {
+      background: #28a745;
       color: white;
-      letter-spacing: 1px;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .heart {
+    #noBtn {
+      background: #dc3545;
+      color: white;
       position: absolute;
-      color: white;
-      font-size: 20px;
-      animation: rain 6s linear infinite;
     }
 
-    @keyframes rain {
+    #countdown {
+      font-size: 30px;
+      color: white;
+      display: none;
+    }
+
+    #finalScreen {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: white;
+      font-family: 'Great Vibes', cursive;
+      font-size: 48px;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: 1s;
+    }
+
+    .heart, .confetti, .firework {
+      position: absolute;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
       0% { transform: translateY(-10vh); opacity: 1; }
       100% { transform: translateY(100vh); opacity: 0; }
     }
+
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      animation: float 8s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
   </style>
 </head>
 
 <body>
 
-<img class="girl" src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif">
+<h1 id="question">Will you be my Valentine? 💗</h1>
 
-<h1>I'm Always With You Jessy 💗</h1>
-<p>Happy Promise Day My Love 🌸</p>
+<img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif">
+
+<div class="btn-container">
+  <button id="yesBtn" onclick="startLove()">Yes 💖</button>
+  <button id="noBtn" onmouseover="moveNo()">No 😜</button>
+</div>
+
+<div id="countdown"></div>
+
+<div id="finalScreen">
+  <div id="typedText"></div>
+</div>
+
+<audio id="bgMusic" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+</audio>
 
 <script>
-  setInterval(() => {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "💗";
-    heart.style.left = Math.random() * 100 + "vw";
-    document.body.appendChild(heart);
+let noSize = 1;
+let yesSize = 1;
 
-    setTimeout(() => heart.remove(), 6000);
-  }, 400);
+function moveNo() {
+  const noBtn = document.getElementById("noBtn");
+  const yesBtn = document.getElementById("yesBtn");
+
+  noBtn.style.left = Math.random() * (window.innerWidth - 100) + "px";
+  noBtn.style.top = Math.random() * (window.innerHeight - 100) + "px";
+
+  noSize -= 0.1;
+  yesSize += 0.1;
+
+  noBtn.style.transform = `scale(${noSize})`;
+  yesBtn.style.transform = `scale(${yesSize})`;
+}
+
+function startLove() {
+  document.getElementById("bgMusic").play();
+  document.querySelector(".btn-container").style.display = "none";
+  document.getElementById("question").style.display = "none";
+  startCountdown();
+}
+
+function startCountdown() {
+  let count = 5;
+  const cd = document.getElementById("countdown");
+  cd.style.display = "block";
+  cd.innerHTML = count;
+
+  const interval = setInterval(() => {
+    count--;
+    cd.innerHTML = count;
+    if (count === 0) {
+      clearInterval(interval);
+      cd.style.display = "none";
+      showFinal();
+    }
+  }, 1000);
+}
+
+function showFinal() {
+  const final = document.getElementById("finalScreen");
+  final.style.opacity = "1";
+  final.style.pointerEvents = "auto";
+
+  typeText("I'm Always With You Jessy 💗\nHappy Promise Day My Love 🥰");
+  hearts();
+  confetti();
+  fireworks();
+}
+
+function typeText(text) {
+  const element = document.getElementById("typedText");
+  let i = 0;
+  function typing() {
+    if (i < text.length) {
+      element.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typing, 60);
+    }
+  }
+  typing();
+}
+
+function hearts() {
+  setInterval(() => {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "💗";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.fontSize = (Math.random() * 20 + 20) + "px";
+    h.style.animationDuration = (Math.random() * 3 + 2) + "s";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 5000);
+  }, 300);
+}
+
+function confetti() {
+  for (let i = 0; i < 100; i++) {
+    const c = document.createElement("div");
+    c.className = "confetti";
+    c.innerHTML = "🎉";
+    c.style.left = Math.random() * 100 + "vw";
+    c.style.fontSize = (Math.random() * 15 + 15) + "px";
+    c.style.animationDuration = (Math.random() * 3 + 2) + "s";
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 4000);
+  }
+}
+
+function fireworks() {
+  for (let i = 0; i < 50; i++) {
+    const f = document.createElement("div");
+    f.className = "firework";
+    f.innerHTML = "✨";
+    f.style.left = Math.random() * 100 + "vw";
+    f.style.fontSize = (Math.random() * 20 + 20) + "px";
+    f.style.animationDuration = (Math.random() * 3 + 2) + "s";
+    document.body.appendChild(f);
+    setTimeout(() => f.remove(), 4000);
+  }
+}
+
+for (let i = 0; i < 15; i++) {
+  const bubble = document.createElement("div");
+  bubble.className = "bubble";
+  bubble.style.width = bubble.style.height = (Math.random() * 60 + 20) + "px";
+  bubble.style.left = Math.random() * 100 + "vw";
+  bubble.style.top = Math.random() * 100 + "vh";
+  document.body.appendChild(bubble);
+}
 </script>
 
 </body>
