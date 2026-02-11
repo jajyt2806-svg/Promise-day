@@ -87,6 +87,7 @@
       opacity: 0;
       pointer-events: none;
       transition: 1s;
+      white-space: pre-line;
     }
 
     .heart, .confetti, .firework {
@@ -131,10 +132,6 @@
   <div id="typedText"></div>
 </div>
 
-<audio id="bgMusic" loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
-</audio>
-
 <script>
 let noSize = 1;
 let yesSize = 1;
@@ -154,7 +151,6 @@ function moveNo() {
 }
 
 function startLove() {
-  document.getElementById("bgMusic").play();
   document.querySelector(".btn-container").style.display = "none";
   document.getElementById("question").style.display = "none";
   startCountdown();
